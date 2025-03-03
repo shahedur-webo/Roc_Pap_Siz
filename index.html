@@ -1,39 +1,174 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Stone, Paper and Scissors</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors - Ultimate Edition</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 
+    <style>
+        body {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #fff;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+        }
+        .message {
+            font-size: 1.5em;
+            margin-top: 1em;
+            padding: 10px;
+            transition: 0.5s ease;
+        }
+        .images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+            margin-top: 2em;
+        }
+        .computer img, .player img {
+            width: 120px;
+            transition: transform 0.3s ease;
+        }
+        .shake {
+            animation: shake 0.8s linear;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+        .points {
+            font-size: 1.2em;
+            margin: 1em 0;
+        }
+        .options {
+            margin-top: 2em;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .options button, .reset {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .options button:hover, .reset:hover {
+            background: #00c6ff;
+            border-color: #00c6ff;
+        }
+        .reset {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div class="container">
-  <div class="message">CHOOSE AN OPTION</div>
-  <div class="images">
-    <div class="computer">
-      <!--
-        Download Images from this link-
-        https://bit.ly/31Prgax
-      -->
-      <img src="https://previews.dropbox.com/p/thumb/AA8JC6u2a9_MOZpgpK5_7r1O1IIiul14yRcLzfuRRGoyIj682fON-iv-BdT3lVc5ektPYPX4E-vQ3OMP1kI1yfVIaQ378wuykxZMpZ4AfoVWbTcrmRaiO0JL65bc-DJ_grTgvZxQd-4-aDmCLFfuX-4pMeJ-h9llaCzvC9jKWnVXN38fZDatuk8ccml1Kjiw9pDAAvHX2lTxXWhfqp124XMJgA2-CK2dmkSh2pfodT8pbyy3MZ1sWk0x9qvuF-d2cF4s4hjOMc4-k28N4hLC9GJkRCV2qYIsmB1LjSK0mYz3Ujw8AVyGva7i_bhNvWpkq13iuH_umkQVK3Dy0toRxAOTYooCeA8-AIYJOOLBAVEDkw/p.png?fv_content=true&size_mode=5" />
+
+    <h1>Rock, Paper, Scissors</h1>
+    <div class="message">Choose an option to start!</div>
+
+    <div class="images">
+        <div class="computer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="computerChoice">
+        </div>
+        <div class="player">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="playerChoice">
+        </div>
     </div>
-    <div class="player">
-      <img src="https://previews.dropbox.com/p/thumb/AA9zI3rHcwmrsFs4QJ_2zD7Q0NkVcVGd1k1WrbLywc8GC4byQ05FS-79VCJ9ThbKOXbfiUv-5MUghQ1SV__lEXiNa0LwDZyVLNoiVMDyweZwA8GKJEUUPt58JwkIE-lldgxgfC6G5XXY9FkHw0wkzzym_O5beeGUzgF8PxcvhBmaLPD41JJcGlrIVKr0irOgU2NSs80Rnw22AhanP4y5bWlqqX6uOLx29AE5z6B1eZgbR6HCPSHRmW39aQamjoIO3b6vT4ixlbiaE1ps772yoSinfCsFif05hiKk4CaTvcZBQWWeDqOpHV0nBw7Jca5MuBE4zlHXWhbJlaTMy4oZ4a5xgOi90X74f1Zf4yy8tipuGA/p.png?size=2048x1536&size_mode=3" />
+
+    <div class="points">
+        <strong>Computer:</strong> <span class="computerPoints">0</span> |
+        <strong>Player:</strong> <span class="playerPoints">0</span>
     </div>
-  </div>
-  <div class="points">
-    COMPUTER <span class="computerPoints">0</span> /
-    <span class="playerPoints">0</span> PLAYER
-  </div>
-  <div class="options">
-    <button type="button">STONE</button>
-    <button type="button">PAPER</button>
-    <button type="button">SCISSORS</button>
-  </div>
-</div>
-<!-- partial -->
-  <script  src="./script.js"></script>
+
+    <div class="options">
+        <button type="button" data-choice="STONE">🪨 Rock</button>
+        <button type="button" data-choice="PAPER">📜 Paper</button>
+        <button type="button" data-choice="SCISSORS">✂️ Scissors</button>
+    </div>
+
+    <button class="reset">🔄 Reset Game</button>
+
+    <script>
+        const computerImg = document.getElementById("computerChoice");
+        const playerImg = document.getElementById("playerChoice");
+        const computerPoints = document.querySelector(".computerPoints");
+        const playerPoints = document.querySelector(".playerPoints");
+        const message = document.querySelector(".message");
+        const buttons = document.querySelectorAll(".options button");
+        const resetButton = document.querySelector(".reset");
+
+        const images = {
+            "STONE": "https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png",
+            "PAPER": "https://upload.wikimedia.org/wikipedia/commons/4/43/Rock-paper-scissors_%28paper%29.png",
+            "SCISSORS": "https://upload.wikimedia.org/wikipedia/commons/6/67/Rock-paper-scissors_%28scissors%29.png"
+        };
+
+        const sounds = {
+            "win": new Audio("https://www.fesliyanstudios.com/play-mp3/4386"),
+            "lose": new Audio("https://www.fesliyanstudios.com/play-mp3/4401"),
+            "draw": new Audio("https://www.fesliyanstudios.com/play-mp3/4402"),
+            "click": new Audio("https://www.fesliyanstudios.com/play-mp3/4368")
+        };
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                sounds.click.play();
+
+                const playerChoice = button.getAttribute("data-choice");
+                const choices = ["STONE", "PAPER", "SCISSORS"];
+                const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+                computerImg.classList.add("shake");
+                playerImg.classList.add("shake");
+
+                setTimeout(() => {
+                    computerImg.classList.remove("shake");
+                    playerImg.classList.remove("shake");
+
+                    playerImg.src = images[playerChoice];
+                    computerImg.src = images[computerChoice];
+
+                    let cPoints = parseInt(computerPoints.innerHTML);
+                    let pPoints = parseInt(playerPoints.innerHTML);
+
+                    if (playerChoice === computerChoice) {
+                        message.textContent = "🤝 It's a draw!";
+                        sounds.draw.play();
+                    } else if (
+                        (playerChoice === "STONE" && computerChoice === "SCISSORS") ||
+                        (playerChoice === "PAPER" && computerChoice === "STONE") ||
+                        (playerChoice === "SCISSORS" && computerChoice === "PAPER")
+                    ) {
+                        playerPoints.innerHTML = pPoints + 1;
+                        message.textContent = "🎉 You win!";
+                        sounds.win.play();
+                    } else {
+                        computerPoints.innerHTML = cPoints + 1;
+                        message.textContent = "😞 You lost!";
+                        sounds.lose.play();
+                    }
+                }, 900);
+            });
+        });
+
+        resetButton.addEventListener("click", () => {
+            computerPoints.innerHTML = "0";
+            playerPoints.innerHTML = "0";
+            message.textContent = "Choose an option to start!";
+            playerImg.src = images["STONE"];
+            computerImg.src = images["STONE"];
+            sounds.click.play();
+        });
+    </script>
 
 </body>
 </html>
