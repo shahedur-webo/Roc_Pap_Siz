@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors - Ultimate Edition</title>
+    <title>Rock, Paper, Scissors</title>
     
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background: linear-gradient(to right, #141e30, #243b55);
-            color: #fff;
-            font-family: "Poppins", sans-serif;
+            background: linear-gradient(to right, #2d2a3d, #3e4a5c);
+            color: white;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
         .message {
             font-size: 1.5em;
-            margin-top: 1em;
+            margin-top: 10px;
             padding: 10px;
             transition: 0.5s ease;
         }
@@ -29,11 +34,11 @@
             margin-top: 2em;
         }
         .computer img, .player img {
-            width: 120px;
+            width: 100px;
             transition: transform 0.3s ease;
         }
         .shake {
-            animation: shake 0.8s linear;
+            animation: shake 0.8s ease;
         }
         @keyframes shake {
             0%, 100% { transform: rotate(0deg); }
@@ -43,7 +48,7 @@
         }
         .points {
             font-size: 1.2em;
-            margin: 1em 0;
+            margin: 20px 0;
         }
         .options {
             margin-top: 2em;
@@ -55,7 +60,7 @@
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
             border: 2px solid #fff;
-            padding: 15px 25px;
+            padding: 15px 30px;
             border-radius: 10px;
             font-size: 1.2em;
             cursor: pointer;
@@ -77,15 +82,15 @@
 
     <div class="images">
         <div class="computer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="computerChoice">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="computerChoice" alt="Computer Choice">
         </div>
         <div class="player">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="playerChoice">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="playerChoice" alt="Player Choice">
         </div>
     </div>
 
     <div class="points">
-        <strong>Computer:</strong> <span class="computerPoints">0</span> |
+        <strong>Computer:</strong> <span class="computerPoints">0</span> | 
         <strong>Player:</strong> <span class="playerPoints">0</span>
     </div>
 
@@ -156,7 +161,7 @@
                         message.textContent = "😞 You lost!";
                         sounds.lose.play();
                     }
-                }, 900);
+                }, 900);  // Delay for animation effect
             });
         });
 
