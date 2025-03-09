@@ -3,177 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors</title>
-    
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            background: linear-gradient(to right, #2d2a3d, #3e4a5c);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .message {
-            font-size: 1.5em;
-            margin-top: 10px;
-            padding: 10px;
-            transition: 0.5s ease;
-        }
-        .images {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 100px;
-            margin-top: 2em;
-        }
-        .computer img, .player img {
-            width: 100px;
-            transition: transform 0.3s ease;
-        }
-        .shake {
-            animation: shake 0.8s ease;
-        }
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            50% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
-        }
-        .points {
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
-        .options {
-            margin-top: 2em;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .options button, .reset {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 2px solid #fff;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .options button:hover, .reset:hover {
-            background: #00c6ff;
-            border-color: #00c6ff;
-        }
-        .reset {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <h1>Rock, Paper, Scissors</h1>
-    <div class="message">Choose an option to start!</div>
-
-    <div class="images">
-        <div class="computer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="computerChoice" alt="Computer Choice">
+    <div class="container">
+        <h1>Rock, Paper, Scissors</h1>
+        <p>Choose your move:</p>
+        
+        <div class="choices">
+            <button id="rock">✊</button>
+            <button id="paper">✋</button>
+            <button id="scissors">✌</button>
         </div>
-        <div class="player">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png" id="playerChoice" alt="Player Choice">
+
+        <div id="result-box">
+            <p id="player-choice">You: ❓</p>
+            <p id="computer-choice">Computer: ❓</p>
+            <p id="result">Make your move!</p>
         </div>
+
+        <button id="restart">Restart</button>
     </div>
 
-    <div class="points">
-        <strong>Computer:</strong> <span class="computerPoints">0</span> | 
-        <strong>Player:</strong> <span class="playerPoints">0</span>
-    </div>
-
-    <div class="options">
-        <button type="button" data-choice="STONE">🪨 Rock</button>
-        <button type="button" data-choice="PAPER">📜 Paper</button>
-        <button type="button" data-choice="SCISSORS">✂️ Scissors</button>
-    </div>
-
-    <button class="reset">🔄 Reset Game</button>
-
-    <script>
-        const computerImg = document.getElementById("computerChoice");
-        const playerImg = document.getElementById("playerChoice");
-        const computerPoints = document.querySelector(".computerPoints");
-        const playerPoints = document.querySelector(".playerPoints");
-        const message = document.querySelector(".message");
-        const buttons = document.querySelectorAll(".options button");
-        const resetButton = document.querySelector(".reset");
-
-        const images = {
-            "STONE": "https://upload.wikimedia.org/wikipedia/commons/8/89/Rock-paper-scissors_%28rock%29.png",
-            "PAPER": "https://upload.wikimedia.org/wikipedia/commons/4/43/Rock-paper-scissors_%28paper%29.png",
-            "SCISSORS": "https://upload.wikimedia.org/wikipedia/commons/6/67/Rock-paper-scissors_%28scissors%29.png"
-        };
-
-        const sounds = {
-            "win": new Audio("https://www.fesliyanstudios.com/play-mp3/4386"),
-            "lose": new Audio("https://www.fesliyanstudios.com/play-mp3/4401"),
-            "draw": new Audio("https://www.fesliyanstudios.com/play-mp3/4402"),
-            "click": new Audio("https://www.fesliyanstudios.com/play-mp3/4368")
-        };
-
-        buttons.forEach(button => {
-            button.addEventListener("click", () => {
-                sounds.click.play();
-
-                const playerChoice = button.getAttribute("data-choice");
-                const choices = ["STONE", "PAPER", "SCISSORS"];
-                const computerChoice = choices[Math.floor(Math.random() * 3)];
-
-                computerImg.classList.add("shake");
-                playerImg.classList.add("shake");
-
-                setTimeout(() => {
-                    computerImg.classList.remove("shake");
-                    playerImg.classList.remove("shake");
-
-                    playerImg.src = images[playerChoice];
-                    computerImg.src = images[computerChoice];
-
-                    let cPoints = parseInt(computerPoints.innerHTML);
-                    let pPoints = parseInt(playerPoints.innerHTML);
-
-                    if (playerChoice === computerChoice) {
-                        message.textContent = "🤝 It's a draw!";
-                        sounds.draw.play();
-                    } else if (
-                        (playerChoice === "STONE" && computerChoice === "SCISSORS") ||
-                        (playerChoice === "PAPER" && computerChoice === "STONE") ||
-                        (playerChoice === "SCISSORS" && computerChoice === "PAPER")
-                    ) {
-                        playerPoints.innerHTML = pPoints + 1;
-                        message.textContent = "🎉 You win!";
-                        sounds.win.play();
-                    } else {
-                        computerPoints.innerHTML = cPoints + 1;
-                        message.textContent = "😞 You lost!";
-                        sounds.lose.play();
-                    }
-                }, 900);  // Delay for animation effect
-            });
-        });
-
-        resetButton.addEventListener("click", () => {
-            computerPoints.innerHTML = "0";
-            playerPoints.innerHTML = "0";
-            message.textContent = "Choose an option to start!";
-            playerImg.src = images["STONE"];
-            computerImg.src = images["STONE"];
-            sounds.click.play();
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
