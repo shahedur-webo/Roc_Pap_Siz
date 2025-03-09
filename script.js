@@ -4,7 +4,6 @@ const icons = { rock: "✊", paper: "✋", scissors: "✌" };
 document.getElementById("rock").addEventListener("click", () => playGame("rock"));
 document.getElementById("paper").addEventListener("click", () => playGame("paper"));
 document.getElementById("scissors").addEventListener("click", () => playGame("scissors"));
-document.getElementById("restart").addEventListener("click", resetGame);
 
 function playGame(playerChoice) {
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
