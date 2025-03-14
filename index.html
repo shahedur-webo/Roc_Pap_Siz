@@ -14,6 +14,7 @@
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.140/build/three.module.js';
         import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three/examples/jsm/loaders/GLTFLoader.js';
         import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js';
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three/examples/jsm/controls/OrbitControls.js';
 
         // Scene Setup
         const scene = new THREE.Scene();
@@ -31,25 +32,24 @@
         pointLight.position.set(0, 5, 0);
         scene.add(pointLight);
 
-        // Load Steampunk City Model
-         loader.load('steampunk_city.glb', function (gltf) {
-        scene.add(gltf.scene);
-        }, undefined, function (error) {
-        console.error('Error loading model:', error);
-             const spotlight = new THREE.SpotLight(0xffa500, 2);
+        // Additional Spotlight for Better Lighting
+        const spotlight = new THREE.SpotLight(0xffa500, 2);
         spotlight.position.set(5, 15, 5);
         spotlight.castShadow = true;
         scene.add(spotlight);
 
+        // Load Steampunk City Model
+        const loader = new GLTFLoader();
+        loader.load('steampunk_city.glb', function(gltf) {
+            scene.add(gltf.scene);
+        }, undefined, function(error) {
+            console.error('Error loading model:', error);
         });
-
-
-
 
         // Add Floating Airship
         const airship = new THREE.Mesh(
             new THREE.CylinderGeometry(2, 2, 8, 32), 
-            new THREE.MeshStandardMaterial({ color: 0x8B4513 })
+            new THREE.MeshStandardMaterial({ color: 0x8B4513, metalness: 0.7, roughness: 0.3 })
         );
         airship.position.set(5, 10, -5);
         scene.add(airship);
@@ -58,18 +58,22 @@
         // Add Rotating Gear
         const gear = new THREE.Mesh(
             new THREE.TorusGeometry(2, 0.5, 16, 32), 
-            new THREE.MeshStandardMaterial({ color: 0x8B4513, metalness: 0.7, roughness: 0.4 })
-            new THREE.MeshStandardMaterial({ color: 0x8B4513, metalness: 0.7, roughness: 0.3 });
-
+            new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 })
         );
         gear.position.set(-3, 2, 0);
         scene.add(gear);
         gsap.to(gear.rotation, { z: Math.PI * 2, duration: 4, repeat: -1, ease: "linear" });
 
+        // OrbitControls for Camera Movement
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
         // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
+            controls.update();
         }
         animate();
 
@@ -79,12 +83,6 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
-        // Camera Movement
-        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three/examples/jsm/controls/OrbitControls.js';
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true; // Smooth effect
-        controls.dampingFactor = 0.05;
-
     </script>
 </body>
 </html>
