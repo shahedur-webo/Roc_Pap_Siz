@@ -32,8 +32,18 @@
         scene.add(pointLight);
 
         // Load Steampunk City Model
-        const loader = new GLTFLoader();
-       loader.load('steampunk_city.glb', function(gltf) { ... });
+         loader.load('steampunk_city.glb', function (gltf) {
+        scene.add(gltf.scene);
+        }, undefined, function (error) {
+        console.error('Error loading model:', error);
+             const spotlight = new THREE.SpotLight(0xffa500, 2);
+        spotlight.position.set(5, 15, 5);
+        spotlight.castShadow = true;
+        scene.add(spotlight);
+
+        });
+
+
 
 
         // Add Floating Airship
@@ -48,7 +58,9 @@
         // Add Rotating Gear
         const gear = new THREE.Mesh(
             new THREE.TorusGeometry(2, 0.5, 16, 32), 
-            new THREE.MeshStandardMaterial({ color: 0xd4af37 })
+            new THREE.MeshStandardMaterial({ color: 0x8B4513, metalness: 0.7, roughness: 0.4 })
+            new THREE.MeshStandardMaterial({ color: 0x8B4513, metalness: 0.7, roughness: 0.3 });
+
         );
         gear.position.set(-3, 2, 0);
         scene.add(gear);
@@ -67,6 +79,12 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
+        // Camera Movement
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three/examples/jsm/controls/OrbitControls.js';
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; // Smooth effect
+        controls.dampingFactor = 0.05;
+
     </script>
 </body>
 </html>
