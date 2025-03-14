@@ -33,9 +33,8 @@
 
         // Load Steampunk City Model
         const loader = new GLTFLoader();
-        loader.load('steampunk_city.glb', function(gltf) {
-            scene.add(gltf.scene);
-        });
+       loader.load('steampunk_city.glb', function(gltf) { ... });
+
 
         // Add Floating Airship
         const airship = new THREE.Mesh(
