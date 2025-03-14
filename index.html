@@ -3,29 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Steampunk City</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #1a1a1a; }
+        canvas { display: block; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Rock, Paper, Scissors</h1>
-        <p>Choose your move:</p>
-        
-        <div class="choices">
-            <button id="rock">✊</button>
-            <button id="paper">✋</button>
-            <button id="scissors">✌</button>
-        </div>
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.140/build/three.module.js';
+        import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three/examples/jsm/loaders/GLTFLoader.js';
+        import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js';
 
-        <div id="result-box">
-            <p id="player-choice">You: ❓</p>
-            <p id="computer-choice">Computer: ❓</p>
-            <p id="result">Make your move!</p>
-        </div>
+        // Scene Setup
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0x331100, 10, 50);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        camera.position.set(0, 5, 15);
 
-        <button id="restart">Restart</button>
-    </div>
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x552200, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffa500, 1, 10);
+        pointLight.position.set(0, 5, 0);
+        scene.add(pointLight);
 
-    <script src="script.js"></script>
+        // Load Steampunk City Model
+        const loader = new GLTFLoader();
+        loader.load('steampunk_city.glb', function(gltf) {
+            scene.add(gltf.scene);
+        });
+
+        // Add Floating Airship
+        const airship = new THREE.Mesh(
+            new THREE.CylinderGeometry(2, 2, 8, 32), 
+            new THREE.MeshStandardMaterial({ color: 0x8B4513 })
+        );
+        airship.position.set(5, 10, -5);
+        scene.add(airship);
+        gsap.to(airship.position, { y: 12, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+        // Add Rotating Gear
+        const gear = new THREE.Mesh(
+            new THREE.TorusGeometry(2, 0.5, 16, 32), 
+            new THREE.MeshStandardMaterial({ color: 0xd4af37 })
+        );
+        gear.position.set(-3, 2, 0);
+        scene.add(gear);
+        gsap.to(gear.rotation, { z: Math.PI * 2, duration: 4, repeat: -1, ease: "linear" });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
 </body>
 </html>
