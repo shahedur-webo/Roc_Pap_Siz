@@ -1,0 +1,259 @@
+.about {
+  position: relative;
+  padding-top: 200rem;
+  width: 100%;
+  background-color: var(--bg);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -350rem;
+    right: -250rem;
+    width: 500rem;
+    height: 500rem;
+    background-color: #1a2023;
+    border-radius: 50%;
+    z-index: 100;
+    transform: scale(0);
+    transition: var(--transition-long-title);
+    transition-delay: 1.3s;
+
+    @media (max-width: 1100px) {
+      top: -150px;
+      right: -125px;
+      width: 250px;
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    padding-top: 100px;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 150px;
+    padding-bottom: 50px;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  .about-title {
+    position: relative;
+
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      height: 545rem;
+
+      @media (max-width: 991px) {
+        height: 190px;
+      }
+
+      @media (max-width: 650px) {
+        height: 150px;
+      }
+
+      @media (max-width: 500px) {
+        height: 130px;
+      }
+
+      &_wrapper {
+        overflow: hidden;
+
+        span {
+          font-family: 'MM fonts';
+          font-size: 630rem;
+          line-height: 1;
+          height: max-content;
+          text-transform: uppercase;
+          white-space: nowrap;
+          display: block;
+          transform: translateY(100%);
+
+          @media (max-width: 991px) {
+            font-size: 250px;
+          }
+
+          @media (max-width: 650px) {
+            font-size: 200px;
+          }
+
+          @media (max-width: 500px) {
+            font-size: 150px;
+          }
+
+          @media (max-width: 400px) {
+            font-size: 130px;
+          }
+        }
+      }
+    }
+
+    &__img {
+      position: absolute;
+      top: 25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 450rem;
+      height: 500rem;
+      overflow: hidden;
+
+      @media (max-width: 991px) {
+        width: 200px;
+        height: 200px;
+        top: 0;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        bottom: -100%;
+      }
+    }
+  }
+
+  .about-text {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 60rem;
+    padding: 0 15rem;
+    width: 100%;
+
+    @media (max-width: 1100px) {
+      margin-top: 130px;
+      padding: 0;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      margin-bottom: 70px;
+    }
+
+    .about-description {
+      width: 40%;
+
+      @media (max-width: 1100px) {
+        width: 60%;
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+
+      &__wrapper {
+        overflow: hidden;
+        display: block;
+      }
+
+      &__text {
+        font-size: 28rem;
+        display: block;
+        transform: translateY(180%);
+
+        @media (max-width: 1100px) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .about-project {
+      width: 9%;
+
+      @media (max-width: 1100px) {
+        width: 15%;
+      }
+
+      @media (max-width: 768px) {
+        width: 25%;
+        margin-left: auto;
+      }
+
+      @media (max-width: 450px) {
+        width: 35%;
+        text-align: right;
+      }
+
+      h2 {
+        font-size: 21rem;
+
+        @media (max-width: 1100px) {
+          font-size: 16px;
+          text-align: end;
+        }
+
+        @media (max-width: 768px) {
+          margin-top: 60px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .about-more-btn {
+    text-transform: uppercase;
+    margin-left: auto;
+    width: max-content;
+    padding: 0 10rem;
+
+    @media (max-width: 1100px) {
+      padding: 0;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+      margin: 0 auto;
+    }
+
+    a {
+      font-size: 46rem;
+      font-weight: 500;
+      font-family: 'MM fonts';
+      position: relative;
+      overflow: hidden;
+      display: block;
+
+      @media (max-width: 1100px) {
+        font-size: 38px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 40px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5rem;
+        background-color: var(--btn-bg);
+        transition: var(--transition-long);
+
+        @media (max-width: 1100px) {
+          height: 5px;
+          bottom: 5px;
+        }
+      }
+
+      &:hover {
+        &::after {
+          left: 120%;
+          transition-delay: 0;
+        }
+      }
+
+      &:not(:hover) {
+        &::after {
+          left: 0;
+          transition-delay: 0.6s;
+        }
+      }
+    }
+  }
+}

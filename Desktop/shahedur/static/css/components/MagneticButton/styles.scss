@@ -1,0 +1,10 @@
+.button-wrapper {
+  display: flex;
+
+  .button {
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+  }
+}

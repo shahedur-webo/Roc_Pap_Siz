@@ -1,0 +1,139 @@
+.form-fields {
+  width: 40%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  &-field {
+    margin-bottom: 40rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1rem solid rgb(214, 214, 214);
+
+    @media (max-width: 1100px) {
+      margin-bottom: 30px;
+    }
+
+    &:hover {
+      ::placeholder {
+        padding-left: 20rem;
+        color: var(--text-color);
+
+        @media (max-width: 1100px) {
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    font-size: 24rem;
+    padding: 20rem 0;
+
+    @media (max-width: 1100px) {
+      font-size: 18px;
+      padding: 10px 0;
+    }
+
+    &:focus {
+      &::placeholder {
+        padding-left: 20rem;
+        color: var(--text-color);
+      }
+    }
+  }
+
+  ::placeholder {
+    color: rgb(136, 136, 136);
+    transition: var(--transition-medium);
+  }
+
+  textarea {
+    height: 200rem;
+    padding-right: 20rem;
+    -webkit-appearance: textarea;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    -webkit-box-orient: vertical;
+    cursor: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    @media (max-width: 1100px) {
+      height: 150px;
+      padding-right: 0;
+    }
+  }
+
+  .form-btn {
+    width: max-content;
+    margin-left: auto;
+    margin-top: 56rem;
+
+    @media (max-width: 1100px) {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      margin: 30px auto 0;
+    }
+
+    button {
+      color: #fff;
+      border-radius: 50%;
+      width: 150rem;
+      height: 70rem;
+      border-radius: 20rem;
+      background-color: var(--btn-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+
+      &:hover {
+        .colorBtn {
+          border-radius: 20rem;
+        }
+      }
+
+      @media (max-width: 1100px) {
+        width: auto;
+        height: auto;
+        padding: 15px 30px;
+        border-radius: 10px;
+      }
+
+      .button-text {
+        position: relative;
+        z-index: 2;
+
+        @media (max-width: 1100px) {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.form-succes {
+  font-size: 32rem;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  width: 40%;
+
+  @media (max-width: 1100px) {
+    font-size: 32px;
+  }
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin: 90px auto 0;
+    width: 100%;
+  }
+}

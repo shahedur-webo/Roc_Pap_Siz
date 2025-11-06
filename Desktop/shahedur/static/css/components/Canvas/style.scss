@@ -1,0 +1,79 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: var(--vh);
+
+  &__noise {
+    position: absolute;
+    bottom: 0;
+    left: 20rem;
+    transform: rotate(90deg);
+    width: 500rem;
+    height: 550rem;
+    min-height: 550rem;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.3;
+
+    @media (max-width: 768px) {
+      left: 0;
+      top: -120px;
+      bottom: unset;
+      width: 300px;
+      height: 300px;
+      min-height: 300px;
+      // opacity: 0.5;
+    }
+  }
+  &__spots {
+    position: absolute;
+    transform: rotate(-90deg);
+    bottom: -50rem;
+    right: 0;
+    width: 600rem;
+    height: 600rem;
+    pointer-events: none;
+    z-index: 10;
+    object-fit: contain;
+
+    @media (max-width: 768px) {
+      right: -80px;
+      bottom: -70px;
+      width: 300px;
+      height: 500px;
+      opacity: 0.5;
+    }
+  }
+
+  &-white {
+    content: '';
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    height: var(--vh);
+    background-color: var(--white-color);
+  }
+
+  .marquee-main {
+    width: 600rem;
+    height: 120rem;
+    position: absolute;
+    bottom: 50rem;
+    right: 115rem;
+    background-color: var(--btn-bg);
+    z-index: 100;
+    border-radius: 20rem;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      right: unset;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      height: 60px;
+      width: 80%;
+      border-radius: 15px;
+    }
+  }
+}
